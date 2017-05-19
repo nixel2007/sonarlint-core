@@ -59,7 +59,7 @@ public class PluginCopier {
   private Map<String, PluginInfo> loadPlugins(List<PluginReference> pluginReferences) {
     Map<String, PluginInfo> infosByKey = new HashMap<>();
 
-    Profiler profiler = Profiler.create(LOG).startDebug("Load plugins");
+  //  Profiler profiler = Profiler.create(LOG).startDebug("Load plugins");
 
     for (PluginReference pluginReference : pluginReferences) {
       File jarFile = getFromCacheOrCopy(pluginReference);
@@ -72,7 +72,7 @@ public class PluginCopier {
       }
     }
 
-    profiler.stopDebug();
+  //  profiler.stopDebug();
     return infosByKey;
 
   }

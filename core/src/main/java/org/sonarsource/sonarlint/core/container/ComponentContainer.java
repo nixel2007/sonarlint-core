@@ -274,10 +274,10 @@ public class ComponentContainer implements ContainerPopulator.Container {
     ReflectionLifecycleStrategy lifecycleStrategy = new ReflectionLifecycleStrategy(new NullComponentMonitor(), "start", "stop", "close") {
       @Override
       public void start(Object component) {
-        Profiler profiler = Profiler.createIfTrace(Loggers.get(ComponentContainer.class));
-        profiler.start();
+       // Profiler profiler = Profiler.createIfTrace(Loggers.get(ComponentContainer.class));
+     //   profiler.start();
         super.start(component);
-        profiler.stopTrace(component.getClass().getCanonicalName() + " started");
+      //  profiler.stopTrace(component.getClass().getCanonicalName() + " started");
       }
     };
     return new ExtendedDefaultPicoContainer(new OptInCaching(), lifecycleStrategy, null);

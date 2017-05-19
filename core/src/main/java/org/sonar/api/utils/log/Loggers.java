@@ -17,23 +17,33 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonarsource.sonarlint.core.log;
+package org.sonar.api.utils.log;
 
-import org.sonar.api.utils.log.AnalysisLogger;
-import org.sonarsource.sonarlint.core.client.api.common.LogOutput;
-import org.sonarsource.sonarlint.core.util.LoggedErrorHandler;
+public class Loggers {
+  private static Loggers instance = new Loggers();
+  private AnalysisLogger logger = new AnalysisLogger();
 
-public class SonarLintLogging {
-
-  private SonarLintLogging() {
-    // static only
+  public static Logger get(Class<?> name) {
+    return instance.newInstance(name.getName());
   }
 
-  public static void set(LogOutput output) {
-    AnalysisLogger.setOutput(output);
+  public static Logger get(String name) {
+    return instance.newInstance(name);
   }
 
-  public static void setErrorHandler(LoggedErrorHandler errorHandler) {
-    // appender.setErrorHandler(errorHandler);
+  static Loggers getFactory() {
+    return instance;
+  }
+
+  public Logger newInstance(String name) {
+    return logger;
+  }
+
+  protected LoggerLevel getLevel() {
+    return LoggerLevel.TRACE;
+  }
+
+  protected void setLevel(LoggerLevel level) {
+    // no op
   }
 }
